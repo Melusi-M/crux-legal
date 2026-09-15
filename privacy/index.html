@@ -10,21 +10,23 @@
 <main>
   <a class="brand" href="../">CRUX</a>
   <h1>Privacy Policy</h1>
-  <p class="meta">Effective 10 June 2026 · Controller: Emmanqubic (Pty) Ltd, South Africa · privacy@emmanqubic.com</p>
+  <p class="meta">Effective 15 September 2026 · Controller: Emmanqubic (Pty) Ltd, South Africa · privacy@emmanqubic.com</p>
 
   <p>CRUX is built local-first: your workouts, routes, and health metrics live on your phone. This policy explains the little we collect, why, and your rights under POPIA (South Africa) and GDPR.</p>
 
   <h2>What we collect</h2>
   <table>
     <tr><th>Data</th><th>Where it lives</th><th>Why</th></tr>
-    <tr><td>Workout sessions (sport, duration, effort score)</td><td>On your device; optionally synced to our servers (Supabase) if sync is enabled</td><td>Scoring, history, leagues</td></tr>
+    <tr><td>Workout sessions (sport, duration, effort score)</td><td>On your device, and synced to our servers (Supabase, EU region) under an anonymous ID so leagues and history survive a reinstall</td><td>Scoring, history, leagues</td></tr>
     <tr><td>GPS routes</td><td>On your device. Routes are <strong>not</strong> uploaded with sync in v1</td><td>Journey replay</td></tr>
-    <tr><td>Heart rate, resting HR, HRV, sleep (Apple Health / Oura)</td><td>Read on-device; raw samples are processed into a score and stored on your device</td><td>Effort scoring and readiness</td></tr>
-    <tr><td>Age-derived HR baseline</td><td>On your device; synced if sync is enabled</td><td>Personal effort calibration</td></tr>
+    <tr><td>Heart rate, resting HR, HRV, sleep (Apple Health / Oura)</td><td>Read on-device. When a workout is scored, that session's heart-rate samples are sent over TLS to our scoring server, used to compute the score, and <strong>not stored</strong> — only the score and its breakdown are kept</td><td>Effort scoring and readiness</td></tr>
+    <tr><td>Age-derived HR baseline</td><td>On your device and on our servers (HR max, resting HR, and a rolling distribution of your effort loads)</td><td>Personal effort calibration</td></tr>
+    <tr><td>Imported workouts (GPX/FIT files, Apple Health)</td><td>Parsed on your device; the resulting scores sync like any other workout</td><td>Calibrate your effort model from your history</td></tr>
+    <tr><td>Device attestation key id (Apple App Attest)</td><td>A Secure Enclave key's public half is stored on our servers</td><td>Confirm a workout came from a genuine CRUX install (the verified-effort badge) — no personal data</td></tr>
     <tr><td>Purchase status (CRUX Pro)</td><td>RevenueCat (our subscription processor)</td><td>Entitlements; we never see your card details</td></tr>
   </table>
 
-  <p>We do <strong>not</strong> collect: your name or email (no account is required), advertising identifiers, your contacts, or background location. CRUX records location only while a workout is running and you have the app open, and stops the moment you finish.</p>
+  <p>We do <strong>not</strong> collect: your name or email (no account is required — CRUX creates an anonymous ID on first launch), advertising identifiers, or your contacts. CRUX records location only while a workout <strong>you started</strong> is running — including while your screen is locked or the app is in the background, so a locked phone never truncates your route — and stops the moment you tap Finish. Location is never recorded outside a workout, and routes never leave your phone unless you export or share them yourself.</p>
 
   <h2>Health data</h2>
   <p>Apple Health (HealthKit) data is used solely to compute your effort and readiness scores. It is never used for advertising, never sold, and never shared with third parties. You can revoke access at any time in iOS Settings → Health → Data Access.</p>
@@ -34,12 +36,12 @@
 
   <h2>Your rights</h2>
   <ul>
-    <li><strong>Delete everything:</strong> Profile → Settings → "Delete all my data" wipes every workout, route, token, and setting from your device immediately. If you used sync, email privacy@emmanqubic.com and we delete server copies within 30 days.</li>
+    <li><strong>Delete everything:</strong> Profile → Settings → "Delete all my data" wipes every workout, route, token, and setting from your device immediately, and at the same time deletes every synced record (workouts, baseline, league membership, wearable tokens, profile) from our servers and retires the anonymous ID. Email privacy@emmanqubic.com if you want written confirmation.</li>
     <li><strong>Access / portability / correction:</strong> email privacy@emmanqubic.com.</li>
   </ul>
 
   <h2>Retention &amp; security</h2>
-  <p>Synced data is retained while you use CRUX and deleted on request. Transport is TLS; server data is stored with row-level security so only you can read your records.</p>
+  <p>Synced data is retained while you use CRUX and deleted on request. Transport is TLS; server data is stored with row-level security so only you can read your records. Scores are written only by our servers, never by the app, so leaderboards cannot be edited from a device.</p>
 
   <h2>Changes</h2>
   <p>We will not move data collection in a more invasive direction without asking first, in the app, before it happens. Material changes are announced in-app with 30 days' notice.</p>
